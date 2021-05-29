@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+  height: 100vh;
+  background: linear-gradient(rgb(110, 17, 17), brown);
+}
+
+.juego{
+   
+    /* display:flex; */
+    width: 560px;
+    height: 560px;
+    margin: 40px auto;
+    box-shadow: 0px 0px 6px 8px rgb(141, 21, 5), 
+                0px 0px 0px 16px rgb(83, 6, 6);
+    box-sizing: content-box; 
+    cursor: pointer;
+    
+}
+
+
+
+.row{
+ display: flex;
+}
+
+.box{
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    user-select: none;
+    font-size: 55px;
+}
+
+.box-white{
+    background: white; 
+
+}
+
+.box-black{
+    background: rgb(246,76,76);
+}
