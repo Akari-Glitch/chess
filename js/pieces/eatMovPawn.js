@@ -1,11 +1,20 @@
-// this function is in charge of determining the pieces to eat
 let whitePieces = ["♔", "♕", "♖", "♗", "♘", "♙"];
 let blackPieces = ["♚", "♛", "♜", "♝", "♞", "♟"];
+let eatStep = null;
+let rightStep = null;
+let leftStep = null;
+export function enPassant(eatMov, right, left) {
+  rightStep = right;
+  leftStep = left;
+  eatStep = eatMov;
+}
 
+// this function is in charge of determining the pieces to eat
 export function eatMovWhitePawn(box) {
   let right;
   let left;
-  let movEat = [];
+
+  let movEat = box.id == rightStep || box.id == leftStep ? [eatStep] : [];
   let boxId = Number(box.id.substr(3));
   let rightCont;
   let leftCont;
@@ -37,7 +46,7 @@ export function eatMovWhitePawn(box) {
 export function eatMovBlackPawn(box) {
   let right;
   let left;
-  let movEat = [];
+  let movEat = box.id == rightStep || box.id == leftStep ? [eatStep] : [];
   let boxId = Number(box.id.substr(3));
   let rightCont;
   let leftCont;

@@ -1,3 +1,5 @@
+import { movesPiece } from "./selection.js";
+
 let board = [
   "box1",
   "box2",
@@ -64,3 +66,24 @@ let board = [
   "box63",
   "box64",
 ];
+
+//whiteOrBlack will be true if it's white, or false if it's black
+export function checkAnalysis(box, whiteOrBlack) {
+  let moves = movesPiece(box, box.textContent);
+  if (whiteOrBlack) {
+    for (let i = 0; i < moves.length; i++) {
+      if (document.getElementById(moves[i]).textContent == "♚") {
+        alert("jaque a negra");
+        return true;
+      }
+    }
+  } else if (!whiteOrBlack) {
+    for (let i = 0; i < moves.length; i++) {
+      if (document.getElementById(moves[i]).textContent == "♔") {
+        alert("jaque a blanca");
+        return true;
+      }
+    }
+  }
+}
+export function boardAnalysis() {}
