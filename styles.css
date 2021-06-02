@@ -45,7 +45,7 @@ body{
 }
 
 @media screen and (max-width: 1024px){
-    .juego{
-          cursor: none;
-    }
+  
+    .box{
+     user-select: auto;
 }
