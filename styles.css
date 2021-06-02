@@ -44,7 +44,7 @@ body{
     background: rgb(246,76,76);
 }
 
-@media only screen and (max-width: 1200px){
+@media screen and (max-width: 1024px){
     .juego{
           cursor: none;
     }
