@@ -4,15 +4,13 @@ import { movTower } from "./pieces/movTower.js";
 import { movHorse } from "./pieces/movHorse.js";
 import { movBishop } from "./pieces/movBishop.js";
 import { move } from "./move.js";
-import { checkAnalysis, boardAnalysis } from "./board.js";
+import { checkAnalysis } from "./board.js";
+import { whitePieces, blackPieces } from "./shared/data.js";
 
-let whitePieces = ["♔", "♕", "♖", "♗", "♘", "♙"];
-let blackPieces = ["♚", "♛", "♜", "♝", "♞", "♟"];
 let round = true; //if round it's true, it's white's turn
 let pieceSelect = null;
 let moves = [];
 let colorBack;
-let check = false;
 const greenBox = "rgba(172,255,47,0.733)";
 const blackBox = "rgb(246,76,76)";
 const whiteBox = "white";
@@ -23,14 +21,14 @@ document.getElementById("game").addEventListener("click", function (e) {
 
   if (pieceSelect != null && moves.length > 0) {
     if (moves.includes(box.id)) {
-      move(pieceSelect, box, moves);
-      check = checkAnalysis(
+      checkAnalysis(
         box,
-        moves,
+        pieceSelect.textContent,
         whitePieces.includes(pieceSelect.textContent)
       );
-      moves = [];
       round = !round;
+      round = move(pieceSelect, box, moves, round);
+      moves = [];
       box = pieceSelect;
       piece = box.textContent;
     }
@@ -57,59 +55,55 @@ export function movesPiece(box, piece) {
   if (pieceSelect != null) {
     moves = [];
     if (whitePieces.includes(piece) && round) {
-      if (!check) {
-        if (piece === "♙") {
-          moves = movWhitePawn(box);
-        }
-
-        if (piece === "♗") {
-          moves = movBishop(box, piece, whitePieces);
-        }
-
-        if (piece == "♘") {
-          moves = movHorse(box, whitePieces);
-        }
-        if (piece == "♖") {
-          moves = movTower(box, piece, whitePieces);
-        }
-        if (piece == "♕") {
-          moves = moves.concat(
-            movBishop(box, piece, whitePieces),
-            movTower(box, piece, whitePieces)
-          );
-        }
+      if (piece === "♙") {
+        moves = movWhitePawn(box);
       }
+
+      if (piece === "♗") {
+        moves = movBishop(box, piece, whitePieces);
+      }
+
+      if (piece == "♘") {
+        moves = movHorse(box, whitePieces);
+      }
+      if (piece == "♖") {
+        moves = movTower(box, piece, whitePieces);
+      }
+      if (piece == "♕") {
+        moves = moves.concat(
+          movBishop(box, piece, whitePieces),
+          movTower(box, piece, whitePieces)
+        );
+      }
+
       if (piece == "♔") {
         moves = moves.concat(movKing(box, whitePieces));
       }
     }
     /**************************************************/
     if (blackPieces.includes(piece) && !round) {
-      if (!check) {
-        if (piece === "♟") {
-          moves = movBlackPawn(box);
-        }
-        if (piece === "♝") {
-          moves = movBishop(box, piece, whitePieces);
-        }
-        if (piece == "♞") {
-          moves = movHorse(box, blackPieces);
-        }
-        if (piece == "♜") {
-          moves = movTower(box, piece, whitePieces);
-        }
-        if (piece == "♛") {
-          moves = moves.concat(
-            movBishop(box, piece, whitePieces),
-            movTower(box, piece, whitePieces)
-          );
-        }
+      if (piece === "♟") {
+        moves = movBlackPawn(box);
+      }
+      if (piece === "♝") {
+        moves = movBishop(box, piece, whitePieces);
+      }
+      if (piece == "♞") {
+        moves = movHorse(box, blackPieces);
+      }
+      if (piece == "♜") {
+        moves = movTower(box, piece, whitePieces);
+      }
+      if (piece == "♛") {
+        moves = moves.concat(
+          movBishop(box, piece, whitePieces),
+          movTower(box, piece, whitePieces)
+        );
       }
       if (piece == "♚") {
         moves = moves.concat(movKing(box, blackPieces));
       }
     }
   }
-
   return moves;
 }

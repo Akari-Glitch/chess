@@ -44,8 +44,3 @@ body{
     background: rgb(246,76,76);
 }
 
-@media screen and (max-width: 1024px){
-  
-    .box{
-     user-select: auto;
-}

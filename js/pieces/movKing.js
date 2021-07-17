@@ -8,7 +8,6 @@ export function movKing(box, thisPieces) {
   let left = (numBox + 7) % 8 != 0;
   let moves = [];
   let castlingData = getClastleData(box);
-  console.log(`castlingData : ${castlingData}`);
   //right
   if (castlingData[0] && castlingData[1]) {
     document.getElementById("box" + String(numBox + 1)).textContent == "" &&

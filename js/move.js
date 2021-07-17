@@ -1,4 +1,5 @@
 import { enPassant } from "./pieces/eatMovPawn.js";
+import { boardAnalysis } from "./board.js";
 let stepPawn = [false];
 let towerWhiteR = true;
 let towerWhiteL = true;
@@ -6,11 +7,13 @@ let kingWhite = true;
 let towerBlackR = true;
 let towerBlackL = true;
 let kingBlack = true;
-export function move(pieceSelect, box, moves) {
+
+export function move(pieceSelect, box, moves, round) {
   pawnException(pieceSelect, box, moves);
   castling(pieceSelect, box);
   box.textContent = pieceSelect.textContent;
   pieceSelect.textContent = "";
+  return boardAnalysis(pieceSelect, box, round);
 }
 
 function pawnException(pieceSelect, box, moves) {
