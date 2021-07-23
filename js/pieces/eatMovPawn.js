@@ -3,6 +3,7 @@ let blackPieces = ["♚", "♛", "♜", "♝", "♞", "♟"];
 let eatStep = null;
 let rightStep = null;
 let leftStep = null;
+
 export function enPassant(eatMov, right, left) {
   rightStep = right;
   leftStep = left;

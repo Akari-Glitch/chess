@@ -8,12 +8,13 @@ let towerBlackR = true;
 let towerBlackL = true;
 let kingBlack = true;
 
-export function move(pieceSelect, box, moves, round) {
+export function move(pieceSelect, box, moves) {
   pawnException(pieceSelect, box, moves);
   castling(pieceSelect, box);
+  let prevBox = box.textContent;
   box.textContent = pieceSelect.textContent;
   pieceSelect.textContent = "";
-  return boardAnalysis(pieceSelect, box, round);
+  return boardAnalysis(pieceSelect, box, prevBox);
 }
 
 function pawnException(pieceSelect, box, moves) {

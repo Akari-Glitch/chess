@@ -18,7 +18,10 @@ const whiteBox = "white";
 document.getElementById("game").addEventListener("click", function (e) {
   let box = document.getElementById(e.target.id);
   let piece = e.target.textContent;
+  sendMove(box, piece);
+});
 
+export function sendMove(box, piece) {
   if (pieceSelect != null && moves.length > 0) {
     if (moves.includes(box.id)) {
       checkAnalysis(
@@ -35,8 +38,7 @@ document.getElementById("game").addEventListener("click", function (e) {
   }
 
   select(box, piece);
-});
-
+}
 function select(box, piece) {
   if (pieceSelect != box && pieceSelect != null) {
     colorBack = pieceSelect.className == "box box-black" ? blackBox : whiteBox;
@@ -48,10 +50,10 @@ function select(box, piece) {
     pieceSelect = box;
   }
 
-  movesPiece(box, piece);
+  movesPiece(box, piece, pieceSelect, round);
 }
 
-export function movesPiece(box, piece) {
+export function movesPiece(box, piece, pieceSelect, round) {
   if (pieceSelect != null) {
     moves = [];
     if (whitePieces.includes(piece) && round) {
