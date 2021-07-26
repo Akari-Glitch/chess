@@ -80,6 +80,7 @@ function checkmate(king, enemy, whiteOrBlack) {
   let numKing = Number(king.id.substr(3));
   let enemyDirection = [];
   let check = [];
+  let defendedKing;
   let defenseMate = [];
   let enemies = [];
   //mayor
@@ -118,26 +119,33 @@ function checkmate(king, enemy, whiteOrBlack) {
   // el siguiente bloque comprueba cuales piezas pueden defender del jaque
   //whiteOrBlack es true si las blancas amenazan a negras
   if (whiteOrBlack) {
+    let i = 0;
     board.map((boxes) => {
       let piece = document.getElementById(boxes);
 
       if (!whitePieces.includes(piece.textContent) && piece.textContent != "") {
         check = movesPiece(piece, piece.textContent, piece, false);
-        let defendedKing = check.includes(defenseMate);
+        defendedKing = check.includes(defenseMate[0]);
 
-        if (defendedKing != false) {
+        defendedKing = check.find((checkBox) => checkBox === defenseMate[i++]);
+        console.log(defendedKing);
+        console.log(defenseMate);
+        console.log(check);
+        if (defendedKing != undefined) {
           console.log(piece);
         }
       }
     });
   } else if (!whiteOrBlack) {
+    let i = 0;
     board.map((boxes) => {
       let piece = document.getElementById(boxes);
 
       if (whitePieces.includes(piece.textContent) && piece.textContent != "") {
         check = check.concat(movesPiece(piece, piece.textContent, piece, true));
-        let defendedKing = check.includes(defenseMate);
-        if (defendedKing != false) {
+
+        defendedKing = check.find((checkBox) => checkBox === defenseMate[i++]);
+        if (defendedKing != undefined) {
           console.log(piece);
         }
       }
